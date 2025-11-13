@@ -1,0 +1,30 @@
+{
+  "name": "fuel-eu-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.1",
+    "recharts": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "typescript": "^5.4.2",
+    "vite": "^5.3.9",
+    "tailwindcss": "^3.5.1",
+    "postcss": "^8.4.24",
+    "autoprefixer": "^10.4.14",
+    "vitest": "^1.2.1",
+    "@testing-library/react": "^14.0.0",
+    "@types/node": "^20.5.1",
+    "@vitejs/plugin-react": "^4.0.0"
+  }
+}
