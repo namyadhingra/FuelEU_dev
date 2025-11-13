@@ -1,0 +1,15 @@
+# Install dependencies
+cd frontend
+npm install
+
+# Copy environment config
+cp .env.example .env
+
+# Update .env with your backend API URL
+# VITE_API_URL=http://localhost:3000
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
