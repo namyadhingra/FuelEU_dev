@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
-import { findAll } from "../outbound/postgres/routesRepo";
+import { RoutesRepo } from "../outbound/postgres/routesRepo";
+import routesController from "./routesController";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -9,6 +10,9 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+
+// Routes
+const routesRepo = new RoutesRepo();
 
 /**
  * GET /routes
@@ -27,7 +31,7 @@ app.use(express.json());
  */
 app.get("/routes", async (req: Request, res: Response) => {
   try {
-    const routes = await findAll();
+    const routes = await routesRepo.findAll();
     res.status(200).json(routes);
   } catch (error) {
     const errorMessage =
@@ -43,6 +47,9 @@ app.get("/routes", async (req: Request, res: Response) => {
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({ status: "OK" });
 });
+
+// Use routes controller
+app.use("/", routesController);
 
 // Export app for testing
 export { app };
