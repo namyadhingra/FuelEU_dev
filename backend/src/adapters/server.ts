@@ -1,7 +1,11 @@
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
-import { RoutesRepo } from "../outbound/postgres/routesRepo";
-import routesController from "./routesController";
+import { RoutesRepo } from "./outbound/postgres/routesRepo";
+import routesController from "./inbound/http/routesController";
+import comparisonController from "./inbound/http/comparisonController";
+import complianceController from "./inbound/http/complianceController";
+import bankingController from "./inbound/http/bankingController";
+import poolsController from "./inbound/http/poolsController";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -48,8 +52,12 @@ app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({ status: "OK" });
 });
 
-// Use routes controller
+// Use controllers
 app.use("/", routesController);
+app.use("/", comparisonController);
+app.use("/compliance", complianceController);
+app.use("/banking", bankingController);
+app.use("/", poolsController);
 
 // Export app for testing
 export { app };

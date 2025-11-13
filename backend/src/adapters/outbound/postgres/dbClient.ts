@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 
 /**
- * Creates and returns a connected PostgreSQL connection pool.
+ * Creates and returns a PostgreSQL connection pool.
  * Reads configuration from environment variables:
  * - PGHOST: Database host
  * - PGUSER: Database user
@@ -9,13 +9,12 @@ import { Pool } from "pg";
  * - PGDATABASE: Database name
  * - PGPORT: Database port (default: 5432)
  * 
- * @returns A connected Pool instance
- * @throws {Error} If connection fails
+ * @returns A Pool instance (connection is established lazily on first query)
  * 
  * @note To close the pool when done, call: await pool.end()
  * 
  * @example
- * const pool = await getClient();
+ * const pool = getClient();
  * try {
  *   const result = await pool.query('SELECT * FROM routes');
  *   console.log(result.rows);
@@ -23,7 +22,7 @@ import { Pool } from "pg";
  *   await pool.end();
  * }
  */
-export async function getClient(): Promise<Pool> {
+export function getClient(): Pool {
   const pool = new Pool({
     host: process.env.PGHOST || "localhost",
     user: process.env.PGUSER || "postgres",
@@ -31,19 +30,6 @@ export async function getClient(): Promise<Pool> {
     database: process.env.PGDATABASE || "fueleu",
     port: parseInt(process.env.PGPORT || "5432", 10),
   });
-
-  try {
-    // Test the connection
-    const client = await pool.connect();
-    client.release();
-  } catch (error) {
-    await pool.end();
-    throw new Error(
-      `Failed to connect to PostgreSQL database: ${
-        error instanceof Error ? error.message : String(error)
-      }`
-    );
-  }
 
   return pool;
 }

@@ -1,18 +1,10 @@
 import request from "supertest";
-import { app } from "../src/adapters/inbound/http/server";
+import { app } from "../src/adapters/server";
 
 /**
  * Jest integration test suite for baseline route functionality
  * 
- * Note: Ensure jest.config.js includes:
- * module.exports = {
- *   preset: "ts-jest",
- *   testEnvironment: "node",
- *   roots: ["<rootDir>/tests"],
- *   testMatch: ["**/*.test.ts"],
- *   moduleFileExtensions: ["ts", "js"],
- * };
- * 
+ * Note: Ensure jest.config.js includes ts-jest preset and proper configuration.
  * Also requires supertest: npm install --save-dev supertest @types/supertest
  */
 

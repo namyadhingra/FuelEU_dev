@@ -3,14 +3,7 @@ import { computeCB } from "../src/core/domain/CBCalculator";
 /**
  * Jest TypeScript test suite for CBCalculator.computeCB function
  * 
- * Note: Ensure jest.config.js includes ts-jest preset:
- * module.exports = {
- *   preset: "ts-jest",
- *   testEnvironment: "node",
- *   roots: ["<rootDir>/tests"],
- *   testMatch: ["**/*.test.ts"],
- *   moduleFileExtensions: ["ts", "js"],
- * };
+ * Note: Ensure jest.config.js includes ts-jest preset and proper configuration.
  */
 
 describe("CBCalculator.computeCB", () => {

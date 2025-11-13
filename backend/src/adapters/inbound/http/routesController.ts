@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { RoutesRepo } from "../outbound/postgres/routesRepo";
+import { RoutesRepo } from "../../outbound/postgres/routesRepo";
 
 const router = Router();
 const routesRepo = new RoutesRepo();
@@ -20,6 +20,10 @@ const routesRepo = new RoutesRepo();
 router.post("/routes/:id/baseline", async (req: Request, res: Response) => {
   try {
     const routeId = req.params.id;
+    if (!routeId) {
+      res.status(400).json({ error: "Route ID is required" });
+      return;
+    }
 
     await routesRepo.setBaseline(routeId);
     res.status(200).json({ message: "Baseline updated" });
